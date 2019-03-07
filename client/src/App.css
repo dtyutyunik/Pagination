@@ -1,0 +1,19 @@
+.App {
+  text-align: center;
+}
+
+.imageContainer{
+    display: flex;
+    flex-flow: wrap;
+    flex-wrap: wrap;
+}
+
+.imageFiles{
+  flex: 1 auto;
+  width: 40%;
+  border: 2px solid yellow;
+}
+
+.nav{
+  border: 1px solid black;
+}
