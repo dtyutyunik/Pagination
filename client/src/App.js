@@ -13,8 +13,8 @@ class App extends Component {
 
     this.state = {
       gallery: [],
-      view: 'iamges',
-      favorites: [],
+      view: 'images',
+      favorites: '',
 
     }
   }
@@ -25,6 +25,7 @@ class App extends Component {
 
     this.setState({
       gallery: data.data,
+    
 
     })
   }
@@ -32,10 +33,10 @@ class App extends Component {
 
   addToFavorites = (e) => {
 
-    let found=this.state.gallery.filter(image => {
+    let found1=this.state.gallery.filter(image => {
       return image.id===e
     })
-
+    let found = found1[0];
 
 
     this.setState({
