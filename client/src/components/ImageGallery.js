@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import { Button, Icon, Modal  } from 'antd';
 
 export default class ImageGallery extends Component{
 
@@ -9,26 +9,22 @@ export default class ImageGallery extends Component{
     this.state={
       currentPage: 1,
       maxNumber: 20,
-      maxPage: this.props.data.length
+      maxPage: this.props.data.length,
+      visible: false
+
     }
   }
 
     changePage=(pageNumber)=>{
-      console.log(pageNumber)
       this.setState({
         currentPage: pageNumber
       })
     }
 
     nextPage=(pageNumber)=>{
-
-
-      // if(this.state.currentPage<this.state.maxPage){
         this.setState({
           currentPage: this.state.currentPage+1
         })
-      // }
-
     }
 
     prevPage=(pageNumber)=>{
@@ -37,48 +33,73 @@ export default class ImageGallery extends Component{
           currentPage: this.state.currentPage-1
         })
       }
-      else{
-        console.log('its at lowest page')
-      }
 
     }
+
+    showModal=(image)=>{
+      this.setState({
+        visible: true,
+        item: image
+      });
+    }
+
+    hideModal = () => {
+    this.setState({
+      visible: false,
+    });
+  }
 
 
 render(){
-console.log('cur page', this.state.currentPage)
-// console.log('max page', this.state.maxPage)
+  let {view}= this.state;
+
+
+
   return(
+    <div>
+      <Button  onClick={this.prevPage}>
+        <Icon type="left" />Prev
+      </Button>
+      {this.state.currentPage>1?
+        <Button className={this.state.active}
+          onClick={()=>this.changePage(this.state.currentPage-1)}>{this.state.currentPage-1}
+        </Button>:null}
+        <Button  type="primary"
+          onClick={()=>this.changePage(this.state.currentPage)}>{this.state.currentPage}
+        </Button>
+        <Button onClick={()=>this.changePage(this.state.currentPage+1)}>{this.state.currentPage+1}</Button>
+        <Button onClick={this.nextPage}>Next<Icon type="right" /></Button>
 
-<div>
+        <div className="imageContainer">
 
-<button onClick={this.prevPage}>Prev</button>
-{this.state.currentPage>1?<button onClick={()=>this.changePage(this.state.currentPage-1)}>{this.state.currentPage-1}</button>:null}
-<button onClick={()=>this.changePage(this.state.currentPage)}>{this.state.currentPage}</button>
-<button onClick={()=>this.changePage(this.state.currentPage+1)}>{this.state.currentPage+1}</button>
-<button onClick={this.nextPage}>Next</button>
-
-
-    <div className="imageContainer">
-
-    {this.props.data.map((e,index)=>{
-      if(e.id > (this.state.currentPage*20)-20 &&e.id <= (this.state.currentPage*20)){
-        return(
-        <div className="imageFiles" key={e.id}>
-
-          <p>{e.title}</p>
-          <p>{e.id}</p>
-          <p>index is {index}</p>
-          <button onClick={()=>this.props.favorite(e.id)}>Favorite It</button>
-        </div>
-      )
-    }
-    })}
+        {this.props.data.map((e)=>{
+          if(e.id > (this.state.currentPage*this.state.maxNumber)-this.state.maxNumber &&e.id <= (this.state.currentPage*this.state.maxNumber)){
+            return(
+            <div className="imageFiles" key={e.id}>
+              <img className="img" src={e.thumbnailUrl} alt={e.title}/>
+              <p>{e.title}</p>
+              <p> id is {e.id}</p>
+                {this.props.favoriteList.length>0&&this.props.favoriteList.find(fav=>
+                fav.id===e.id)?
+                <Button disabled>Added</Button>:
+                <Button onClick={()=>this.props.favorite(e.id)}>Favorite It</Button>}
+                <Button onClick={()=>this.showModal(e.url)}> Enhance</Button>
+            </div>)}
+        })}
 
     </div>
+        <Modal style={{ top: 20 }}
+            footer={null}
+            bodyStyle={{height: 650}}
+            width='660px'
+            onCancel={this.hideModal}
+            visible={this.state.visible}>
+
+              <img src={this.state.item} alt='picture'></img>
+
+           </Modal>
     </div>
+
   )
 }
 }
-
-
-// <img src={e.thumbnailUrl} alt={e.title}/>
