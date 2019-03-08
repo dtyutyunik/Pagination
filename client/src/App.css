@@ -1,34 +1,58 @@
 @import '~antd/dist/antd.css';
 
-body{
-  background-image: radial-gradient(circle, white , silver);
+body {
+  background-image: radial-gradient(circle, white, silver);
 }
 
 .App {
   text-align: center;
-
 }
 
-.imageContainer{
-    display: flex;
-    flex-flow: wrap;
-    flex-wrap: wrap;
-    margin: 1% 15% 0 15%;
+.imageContainer {
+  display: flex;
+  flex-flow: wrap;
+  flex-wrap: wrap;
+  margin: 1% 15% 0 15%;
 }
 
-.imageFiles{
+.imageFiles {
   flex: 1 auto;
-  width: 40%;
+  box-shadow: 10px 10px 73px 0px rgba(0, 0, 0, 0.75);
+  padding: .2em;
+  width: 45%;
   margin-right: 1%;
   margin-bottom: 1%;
-
-  border: 2px solid yellow;
+  display: grid;
+  grid-template-areas:
+    "buttons title imgs"
 }
 
-.nav{
-  border: 1px solid black;
+img.imgs {
+  grid-area: 'imgs';
 }
 
-.img{
+.title {
+  grid-area: 'title';
+}
 
+.buttons {
+  margin-top: 2%;
+  grid-area: 'buttons';
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.buttons>Button {
+  margin-right: 30px;
+}
+
+p {
+  font-size: 1.5em;
+}
+
+.NoPics {
+  font-size: 3em;
+  margin: 20% auto;
+  font-family: impact;
 }

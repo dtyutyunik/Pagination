@@ -76,14 +76,18 @@ render(){
           if(e.id > (this.state.currentPage*this.state.maxNumber)-this.state.maxNumber &&e.id <= (this.state.currentPage*this.state.maxNumber)){
             return(
             <div className="imageFiles" key={e.id}>
-              <img className="img" src={e.thumbnailUrl} alt={e.title}/>
-              <p>{e.title}</p>
-              <p> id is {e.id}</p>
+
+              <img className="imgs" src={e.thumbnailUrl} alt={e.title}/>
+              <div className="text">
+              <p className='title'>Title: {e.title}</p>
+                <div className="buttons">
                 {this.props.favoriteList.length>0&&this.props.favoriteList.find(fav=>
                 fav.id===e.id)?
                 <Button disabled>Added</Button>:
                 <Button onClick={()=>this.props.favorite(e.id)}>Favorite It</Button>}
                 <Button onClick={()=>this.showModal(e.url)}> Enhance</Button>
+                </div>
+                </div>
             </div>)}
         })}
 
