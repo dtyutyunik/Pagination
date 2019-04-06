@@ -9,4 +9,4 @@
 
 [Pagination code sample](Pagination.png)
 
-[Hosted on] (http://pagination.surge.sh)
+Hosted on(http://pagination.surge.sh)
