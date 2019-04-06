@@ -7,6 +7,7 @@
 3. Favorites functionality
 4. Ant Design implemented for overall look
 
+### Pagination Code Sample
 ![Pagination code sample](Pagination.png)
 
 Hosted on(http://pagination.surge.sh)
